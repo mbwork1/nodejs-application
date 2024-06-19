@@ -4,7 +4,7 @@
   "description": "This Project explains all Node JS examples",
   "main": "app.js",
   "publishConfig": {
-    "registry": "http:54.243.162.232:8089/imgoinup/repository/tesla-pipeline-snapshots/"
+    "registry": "http://54.243.162.232:8089/imgoinup/repository/tesla-npm-repo/"
   },
   "scripts": {
     "server": "http-server -c-1 -p 9999",
