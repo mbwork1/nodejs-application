@@ -1,0 +1,36 @@
+node {
+  stage('CodeCheckout'){
+    sh "echo 'Running NodeJS Project' "
+    git branch: 'master', url: 'https://github.com/mbwork1/nodejs-application.git' 
+  }
+  stage('UnitTest'){
+    sh "echo 'Unit Tests Successful' "
+    //sh "npm test"
+  }
+  stage('Build'){
+    sh "echo 'Creating Build Artifacts' "
+    nodejs(nodeJSInstallationName: 'NodeJS 16') {
+      sh "npm install"
+    }
+  }
+  stage('CodeQuality'){
+    sh "echo 'Code Quality Report' "
+    nodejs(nodeJSInstallationName: 'NodeJS 16') {
+      sh "npm run sonar"
+    }
+  }
+  stage('UploadArtifacts'){
+    sh "echo 'npm packages uploaded' "
+    nodejs(nodeJSInstallationName: 'NodeJS 16') {
+      sh "npm publish"
+    }
+  }
+  /*
+  stage('Deployment to build server'){
+    sh "echo 'npm Deploying Applications' "
+    nodejs(nodeJSInstallationName: 'NodeJS 16') {
+      sh "npm start"
+    }
+  }
+ */
+}
